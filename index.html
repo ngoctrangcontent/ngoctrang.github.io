@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngọc Trang | Content SEO Specialist Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Be Vietnam Pro (Fully optimized for Vietnamese Typography) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Be Vietnam Pro', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            accent: '#06b6d4',
+                            emerald: '#10b981',
+                            violet: '#8b5cf6',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                        'glass-hover': '0 12px 40px 0 rgba(31, 38, 135, 0.15)',
+                        'glow': '0 0 25px rgba(37, 99, 235, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism utility classes */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 0 15px 0 rgba(255, 255, 255, 0.6) inset;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* Ambient Background Blobs */
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.65;
+            animation: floatBlob 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(30px, -40px) scale(1.08); }
+            100% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Intro Splash Screen */
+        body.intro-active {
+            overflow: hidden;
+        }
+        #intro-splash.intro-hide {
+            opacity: 0;
+            transform: scale(1.04);
+            pointer-events: none;
+        }
+        #intro-splash.intro-hide #intro-splash-content {
+            opacity: 0;
+            transform: translateY(-16px) scale(0.96);
+        }
+
+        /* Scroll Reveal Animation — base (slow enough to actually notice, still triggers early) */
+        .reveal {
+            opacity: 0;
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.reveal-active {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) !important;
+        }
+
+        /* Variant: slide up from below (default feel) */
+        .reveal-up { transform: translateY(40px); }
+
+        /* Variant: slide in from the left */
+        .reveal-left { transform: translateX(-64px); }
+
+        /* Variant: slide in from the right */
+        .reveal-right { transform: translateX(64px); }
+
+        /* Variant: zoom + fade in */
+        .reveal-zoom { transform: scale(0.9) translateY(14px); }
+
+        /* Variant: simple fade, no movement */
+        .reveal-fade { transform: none; }
+
+        /* Staggered fade-in for children inside a revealed section */
+        .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-stagger.reveal-active > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-stagger.reveal-active > *:nth-child(1) { transition-delay: 0.04s; }
+        .reveal-stagger.reveal-active > *:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-stagger.reveal-active > *:nth-child(3) { transition-delay: 0.16s; }
+        .reveal-stagger.reveal-active > *:nth-child(4) { transition-delay: 0.22s; }
+        .reveal-stagger.reveal-active > *:nth-child(5) { transition-delay: 0.28s; }
+        .reveal-stagger.reveal-active > *:nth-child(6) { transition-delay: 0.34s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-stagger > * {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-slate-800 antialiased selection:bg-blue-500 selection:text-white intro-active">
+
+    <!-- Intro Splash Screen (Glassmorphism "Xin chào!") -->
+    <div id="intro-splash" class="fixed inset-0 z-[100] flex items-center justify-center bg-white/40 backdrop-blur-2xl transition-all duration-700 ease-out">
+        <!-- Soft ambient blobs behind the greeting, consistent with the rest of the site -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="bg-blob w-96 h-96 bg-blue-200/70 -top-10 -left-10"></div>
+            <div class="bg-blob w-[420px] h-[420px] bg-purple-200/60 bottom-0 -right-20"></div>
+        </div>
+
+        <div id="intro-splash-content" class="relative text-center px-6 transition-all duration-700 ease-out">
+            <div class="mx-auto mb-5 w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-400 flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-blue-500/30">
+                NT
+            </div>
+            <h1 class="font-heading font-extrabold text-4xl sm:text-6xl text-slate-900 tracking-tight">
+                Xin chào<span class="text-blue-600">!</span>
+            </h1>
+            <p class="mt-3 text-sm sm:text-base font-medium text-slate-500">
+                Đang mở hồ sơ của Nguyễn Thị Ngọc Trang...
+            </p>
+        </div>
+    </div>
+
+    <!-- Background Gradient Light Blobs for Glass Effect -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="bg-blob w-96 h-96 bg-blue-200/70 -top-20 -left-20"></div>
+        <div class="bg-blob w-[500px] h-[500px] bg-purple-200/60 top-1/3 -right-32 animation-delay-2000"></div>
+        <div class="bg-blob w-96 h-96 bg-cyan-200/60 bottom-10 left-1/4 animation-delay-4000"></div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-card bg-slate-900/95 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700/60">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-lg" id="toast-icon"></i>
+            <span id="toast-message" class="text-sm font-medium">Đã sao chép thành công!</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
+                <!-- Logo / Name Brand -->
+                <a href="#hero" class="group flex items-center gap-2.5 shrink-0">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-400 flex items-center justify-center text-white font-bold text-base sm:text-lg shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                        NT
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-blue-600 transition-colors whitespace-nowrap">NGUYỄN THỊ NGỌC TRANG</span>
+                        <span class="text-[10px] sm:text-xs font-semibold text-blue-600 tracking-wider uppercase whitespace-nowrap">Content SEO Specialist</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+                    <a href="#about" class="px-3 py-2 text-xs xl:text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50/70 rounded-xl transition-all whitespace-nowrap">Mục Tiêu</a>
+                    <a href="#experience" class="px-3 py-2 text-xs xl:text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50/70 rounded-xl transition-all whitespace-nowrap">Kinh Nghiệm</a>
+                    <a href="#skills" class="px-3 py-2 text-xs xl:text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50/70 rounded-xl transition-all whitespace-nowrap">Kỹ Năng & Công Cụ</a>
+                    <a href="#education" class="px-3 py-2 text-xs xl:text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50/70 rounded-xl transition-all whitespace-nowrap">Học Vấn</a>
+                    <a href="blog.html" class="px-3 py-2 text-xs xl:text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50/70 rounded-xl transition-all whitespace-nowrap">Blog</a>
+                </nav>
+
+                <!-- Quick CTA Header Action Buttons -->
+                <div class="flex items-center gap-2 shrink-0">
+                    <button onclick="openPortfolioModal()" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold text-slate-700 bg-white/90 border border-slate-200 hover:bg-white hover:text-blue-600 hover:border-blue-300 rounded-xl shadow-xs transition-all whitespace-nowrap">
+                        <i class="fa-solid fa-qrcode text-blue-600"></i>
+                        <span>Portfolio QR</span>
+                    </button>
+                    <a href="https://zalo.me/0879302119" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-xl shadow-md shadow-blue-500/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5 whitespace-nowrap">
+                        <i class="fa-solid fa-phone"></i>
+                        <span class="hidden sm:inline">Liên Hệ:</span>
+                        <span>0879 302 119</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12 sm:space-y-16">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative pt-2 sm:pt-4">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-xl">
+                <!-- Glowing Top Accent -->
+                <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-400"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Avatar & Status -->
+                    <div class="lg:col-span-4 flex flex-col items-center text-center">
+                        <div class="relative group">
+                            <!-- Outer Ambient Ring -->
+                            <div class="absolute -inset-1.5 bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500"></div>
+                            
+                            <!-- Profile Picture Container -->
+                            <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full overflow-hidden border-4 border-white shadow-2xl bg-slate-100">
+                                <img src="https://lh3.googleusercontent.com/d/1gKsibiiCs9F8FnjEMzOuWMsXcSCfxg2N" 
+                                     alt="Nguyễn Thị Ngọc Trang" 
+                                     class="w-full h-full object-cover object-center transform group-hover:scale-105 transition duration-500"
+                                     onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1gKsibiiCs9F8FnjEMzOuWMsXcSCfxg2N&sz=w800';">
+                            </div>
+
+                            <!-- Open for Work Badge -->
+                            <div class="absolute bottom-2 right-2 bg-emerald-500 text-white p-2.5 rounded-full border-2 border-white shadow-lg flex items-center justify-center" title="Sẵn sàng làm việc">
+                                <i class="fa-solid fa-briefcase text-xs"></i>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold shadow-xs">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                            <span>Sẵn sàng tiếp nhận cơ hội mới</span>
+                        </div>
+                    </div>
+
+                    <!-- Profile Information -->
+                    <div class="lg:col-span-8 space-y-6 text-center lg:text-left">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
+                                <i class="fa-solid fa-crown text-amber-500"></i> Content SEO Specialist
+                            </div>
+                            <h1 class="text-3xl sm:text-5xl font-heading font-extrabold text-slate-900 tracking-tight leading-tight">
+                                Nguyễn Thị Ngọc Trang
+                            </h1>
+                            <p class="mt-2 text-base sm:text-lg text-slate-600 font-medium">
+                                Content chuẩn SEO • Ứng dụng AI hiệu quả • Tăng trưởng bền vững
+                            </p>
+                        </div>
+
+                        <!-- Personal Quick Info Grid with Verified Copy Fixes -->
+                        <div class="grid grid-cols-1 sm:grid-cols-[2fr_3fr] gap-3 pt-1">
+                            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs">
+                                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-calendar-day"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-xs text-slate-400 font-medium">Năm sinh</span>
+                                    <span class="text-sm font-semibold text-slate-800">2000</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs">
+                                <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-xs text-slate-400 font-medium">Địa chỉ</span>
+                                    <span class="text-sm font-semibold text-slate-800">Hiệp Bình - TP.HCM</span>
+                                </div>
+                            </div>
+
+                            <!-- Phone/Zalo with direct Zalo link & fixed robust copy -->
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs hover:border-blue-300 transition group">
+                                <a href="https://zalo.me/0879302119" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-left overflow-hidden grow">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <div class="truncate">
+                                        <span class="block text-xs text-slate-400 font-medium">Điện thoại/Zalo</span>
+                                        <span class="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition">0879 302 119</span>
+                                    </div>
+                                </a>
+                                <button type="button" onclick="handleCopy(event, '0879302119', 'Số điện thoại', this)" class="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-100 text-slate-500 hover:text-blue-600 transition shrink-0 ml-2" title="Sao chép số điện thoại">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+
+                            <!-- Email with mailto link & fixed robust copy -->
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs hover:border-blue-300 transition group">
+                                <a href="mailto:ngoctrang.contact@gmail.com" class="flex items-center gap-3 text-left overflow-hidden grow">
+                                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div class="truncate">
+                                        <span class="block text-xs text-slate-400 font-medium">Email (Bấm gửi thư)</span>
+                                        <span class="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition truncate block">ngoctrang.contact@gmail.com</span>
+                                    </div>
+                                </a>
+                                <button type="button" onclick="handleCopy(event, 'ngoctrang.contact@gmail.com', 'Email', this)" class="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-100 text-slate-500 hover:text-blue-600 transition shrink-0 ml-2" title="Sao chép Email">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Primary Social Links & CTAs -->
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+                            <!-- LinkedIn Direct Link -->
+                            <a href="https://linkedin.com/in/trangntn/" target="_blank" rel="noopener noreferrer" 
+                               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0a66c2] hover:bg-[#084e96] text-white text-sm font-semibold shadow-md shadow-blue-500/20 hover:shadow-lg transition transform hover:-translate-y-0.5">
+                                <i class="fa-brands fa-linkedin text-lg"></i>
+                                <span>LinkedIn Profile</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70"></i>
+                            </a>
+
+                            <!-- View Portfolio Drive Link -->
+                            <a href="https://drive.google.com/file/d/1s1JZzR8Y9IvJh8ZL-mLC8vQmEeH4ScIY/view?usp=drive_link" target="_blank" rel="noopener noreferrer" 
+                               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-sm font-semibold shadow-md shadow-blue-500/20 transition transform hover:-translate-y-0.5">
+                                <i class="fa-solid fa-folder-open"></i>
+                                <span>Xem Portfolio Drive</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70"></i>
+                            </a>
+
+                            <!-- View Portfolio QR Modal Button -->
+                            <button onclick="openPortfolioModal()" 
+                                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold shadow-md transition transform hover:-translate-y-0.5">
+                                <i class="fa-solid fa-qrcode text-cyan-400"></i>
+                                <span>Mã QR Portfolio</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAREER OBJECTIVES SECTION -->
+        <section id="about" class="scroll-mt-24 reveal reveal-left">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/20">
+                    <i class="fa-solid fa-bullseye text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-heading font-bold text-slate-900">Mục Tiêu Nghề Nghiệp</h2>
+                    <p class="text-xs text-slate-500">Định hướng phát triển ngắn hạn & dài hạn</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Short Term Goal -->
+                <div class="glass-card rounded-2xl p-6 relative group hover:border-blue-400 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-500 to-cyan-400 text-white flex items-center justify-center text-xl shrink-0 shadow-md">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider">
+                                Mục Tiêu Ngắn Hạn
+                            </div>
+                            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
+                                Tối ưu nội dung & Ứng dụng AI hiệu quả để thúc đẩy tăng trưởng <span class="text-blue-600 font-bold">Organic Traffic bền vững</span>, nâng cao thứ hạng từ khóa cho các chiến dịch của doanh nghiệp.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Long Term Goal -->
+                <div class="glass-card rounded-2xl p-6 relative group hover:border-purple-400 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-500 text-white flex items-center justify-center text-xl shrink-0 shadow-md">
+                            <i class="fa-solid fa-chess-king"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-bold uppercase tracking-wider">
+                                Mục Tiêu Dài Hạn
+                            </div>
+                            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
+                                Nâng cao tư duy chiến lược và năng lực quản lý, hướng tới vị trí <span class="text-purple-600 font-bold">Content Leader</span>, xây dựng hệ sinh thái nội dung bền vững cho doanh nghiệp.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK EXPERIENCE SECTION -->
+        <section id="experience" class="scroll-mt-24 reveal reveal-right">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold shadow-md shadow-indigo-500/20">
+                    <i class="fa-solid fa-briefcase text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-heading font-bold text-slate-900">Kinh Nghiệm Làm Việc</h2>
+                    <p class="text-xs text-slate-500">Hành trình thực chiến và kết quả đo lường cụ thể</p>
+                </div>
+            </div>
+
+            <div class="relative border-l-2 border-indigo-200 ml-4 sm:ml-6 space-y-10 pl-6 sm:pl-8">
+
+                <!-- EXPERIENCE 1: TCBM -->
+                <div class="relative group">
+                    <!-- Timeline Dot -->
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-blue-600 border-4 border-white shadow-md ring-4 ring-blue-100 group-hover:scale-125 transition"></div>
+
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-5 transition hover:shadow-glass-hover border-l-4 border-l-blue-600">
+                        <!-- Header Info -->
+                        <div class="flex flex-wrap items-start justify-between gap-3 pb-4 border-b border-slate-200/60">
+                            <div>
+                                <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider">
+                                    09/2022 - Hiện nay
+                                </span>
+                                <h3 class="text-xl sm:text-2xl font-heading font-bold text-slate-900 mt-2">CONTENT SEO MARKETING</h3>
+                                <p class="text-blue-600 font-semibold text-sm sm:text-base flex items-center gap-2 mt-1">
+                                    <i class="fa-solid fa-building"></i> Công ty TNHH VLXD Toàn Cầu - TCBM
+                                </p>
+                            </div>
+                            <a href="https://tcbm.vn" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 text-xs font-semibold transition border border-slate-200">
+                                <span>Website: tcbm.vn</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+
+                        <!-- Content Details -->
+                        <ul class="space-y-3 text-slate-700 text-sm sm:text-base">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-blue-500 mt-1 shrink-0"></i>
+                                <span><strong>Quản trị & Tối ưu SEO:</strong> Nghiên cứu từ khóa, phân tích đối thủ, tối ưu hóa Onpage và Technical để duy trì và cải thiện hiệu suất website tcbm.vn.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-blue-500 mt-1 shrink-0"></i>
+                                <span><strong>Chiến lược & Sản xuất nội dung:</strong> Lập kế hoạch, xây dựng outline và triển khai bài viết chuẩn SEO cho Website.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-blue-500 mt-1 shrink-0"></i>
+                                <span><strong>Nội dung đa phương tiện:</strong> Thiết kế hình ảnh truyền thông MXH; xây dựng Catalogue sản phẩm/Hồ sơ năng lực; biên tập video ngắn (TikTok).</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-blue-500 mt-1 shrink-0"></i>
+                                <span><strong>Hỗ trợ kỹ thuật & Nội bộ:</strong> Tinh chỉnh giao diện website (UI/UX, HTML/CSS cơ bản) và phối hợp tổ chức các sự kiện văn hóa nội bộ công ty.</span>
+                            </li>
+                        </ul>
+
+                        <!-- Highlighted Results Box with Dedicated Metric Cards & Direct Google Spreadsheet Link -->
+                        <div class="mt-4 p-5 rounded-2xl bg-gradient-to-r from-blue-50/90 via-indigo-50/90 to-cyan-50/90 border border-blue-200/80 space-y-4 shadow-sm">
+                            <div class="flex items-center justify-between flex-wrap gap-2 text-blue-900 font-bold text-sm border-b border-blue-200/60 pb-2">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-line text-blue-600 text-base"></i>
+                                    <span>KẾT QUẢ VƯỢT TRỘI ĐẠT ĐƯỢC TẠI TCBM:</span>
+                                </div>
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2.5 py-0.5 rounded-full font-semibold">9/2022 - 10/2024</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                <div class="bg-white/90 p-3.5 rounded-xl border border-blue-100 shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-blue-300 cursor-default">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg font-bold shrink-0">
+                                        <i class="fa-solid fa-arrow-trend-up"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs text-slate-500 block font-medium">Tăng trưởng Organic Traffic</span>
+                                        <span class="text-xl font-heading font-extrabold text-blue-600">+635%</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/90 p-3.5 rounded-xl border border-emerald-100 shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-emerald-300 cursor-default">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg font-bold shrink-0">
+                                        <i class="fa-solid fa-bullseye"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs text-slate-500 block font-medium">Tăng trưởng Conversion Lead</span>
+                                        <span class="text-xl font-heading font-extrabold text-emerald-600">+176%</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/90 p-3.5 rounded-xl border border-purple-100 shadow-xs flex items-center gap-3 sm:col-span-2 lg:col-span-1 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-purple-300 cursor-default">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-lg font-bold shrink-0">
+                                        <i class="fa-solid fa-trophy"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs text-slate-500 block font-medium">Các từ khóa chủ lực</span>
+                                        <span class="text-xl font-heading font-extrabold text-purple-600">Top 10 Google</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Giai đoạn 11/2024 - Hiện tại -->
+                            <div class="p-3.5 sm:p-4 rounded-xl bg-amber-50/90 border border-amber-200/80 text-slate-700 text-xs sm:text-sm leading-relaxed space-y-1">
+                                <div class="flex items-center gap-2 font-bold text-amber-900">
+                                    <i class="fa-solid fa-shield-halved text-amber-600"></i>
+                                    <span>Giai đoạn 11/2024 – Hiện tại:</span>
+                                </div>
+                                <p class="text-slate-600">
+                                    <strong class="text-slate-800">Bối cảnh:</strong> Website gặp sự cố (hiện chưa giải quyết triệt để), tạm dừng ngân sách Off-page.
+                                </p>
+                                <p class="text-slate-600">
+                                    <strong class="text-amber-800 font-semibold">Kết quả:</strong> Các từ khóa chủ lực vẫn giữ vững thứ hạng trong <strong class="text-blue-700">Top 10 Google</strong>. Bảo lưu <strong class="text-slate-800">~5000 - 6000 traffic/tháng</strong> và mang lại <strong class="text-emerald-700 font-bold">80+ lead/tháng</strong> với chi phí tối ưu.
+                                </p>
+                            </div>
+
+                            <div class="pt-1">
+                                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Từ khóa nổi bật đạt Top 10Google:</span>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># ngói bitum</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># bungalow</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">#ngói lợp mái thái</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># mái nhà</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># cao su lưu hóa</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># bảo ôn</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># vật liệu cách nhiệt</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># aerogel</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># keo dán gỗ</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-white border border-blue-200 text-blue-800 text-xs font-semibold shadow-2xs hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"># keo dán tường</span>
+                                </div>
+
+                                <!-- HIGHLY VISIBLE SPREADSHEET LINK BUTTON -->
+                                <a href="https://docs.google.com/spreadsheets/d/1uOHRQ_ZjGm6DAO0VMB4MncxdQaa04wm0S8TZrSXUJS4/edit?usp=drive_link" 
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-500/20 hover:shadow-lg transition transform hover:-translate-y-0.5 group">
+                                    <i class="fa-solid fa-file-excel text-lg text-emerald-200 group-hover:scale-110 transition"></i>
+                                    <span>Xem Trọn Bộ Ranking Từ Khóa Top 10 Google</span>
+                                    <i class="fa-solid fa-arrow-right text-xs opacity-80 group-hover:translate-x-1 transition"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPERIENCE 2: FREELANCER -->
+                <div class="relative group">
+                    <!-- Timeline Dot -->
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-purple-600 border-4 border-white shadow-md ring-4 ring-purple-100 group-hover:scale-125 transition"></div>
+
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-5 transition hover:shadow-glass-hover border-l-4 border-l-purple-600">
+                        <!-- Header Info -->
+                        <div class="flex flex-wrap items-start justify-between gap-3 pb-4 border-b border-slate-200/60">
+                            <div>
+                                <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-bold uppercase tracking-wider">
+                                    12/2021 - Hiện nay
+                                </span>
+                                <h3 class="text-xl sm:text-2xl font-heading font-bold text-slate-900 mt-2">FREELANCER CONTENT SEO</h3>
+                                <p class="text-purple-600 font-semibold text-sm sm:text-base flex items-center gap-2 mt-1">
+                                    <i class="fa-solid fa-laptop-code"></i> Công ty TNHH Seosona & Khách hàng cá nhân
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Content Details -->
+                        <ul class="space-y-3 text-slate-700 text-sm sm:text-base">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-purple-500 mt-1 shrink-0"></i>
+                                <span><strong>Triển khai nội dung đa ngành:</strong> Sản xuất bài viết chuẩn SEO chất lượng cao cho hàng loạt lĩnh vực (Bất động sản, Kiến trúc & Nội thất, Du lịch, Thiết bị nâng hạ, Vận chuyển, Dịch vụ bảo vệ, Y tế,...).</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-purple-500 mt-1 shrink-0"></i>
+                                <span><strong>Hoạch định cấu trúc chủ đề:</strong> Nghiên cứu ý định tìm kiếm (Search Intent), lên Topic chiến lược (đặc biệt cho mảng BĐS) và outline bài viết.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-purple-500 mt-1 shrink-0"></i>
+                                <span><strong>SEO Onpage & Offpage:</strong> Tối ưu Onpage, đăng tải bài viết trên hệ thống CMS; biên soạn nội dung Offpage (cho Backlink báo, bài PR).</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-purple-500 mt-1 shrink-0"></i>
+                                <span><strong>Kiểm duyệt nội dung & Quản lý CTV:</strong> Hỗ trợ check và chỉnh sửa bài viết của các CTV khác tại Agency & Quản lý 3-4 CTV trong các dự án cá nhân.</span>
+                            </li>
+                        </ul>
+
+                        <!-- FREELANCE ACHIEVED RESULTS BLOCK - REDESIGNED 3 HORIZONTAL CARDS -->
+                        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-50/80 via-indigo-50/80 to-blue-50/80 border border-purple-200/80 space-y-3.5 shadow-xs">
+                            <div class="flex items-center justify-between flex-wrap gap-2 text-purple-900 font-bold text-xs sm:text-sm border-b border-purple-200/60 pb-2">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-trophy text-purple-600"></i>
+                                    <span>KẾT QUẢ ĐẠT ĐƯỢC KHI LÀM FREELANCE:</span>
+                                </div>
+                                <span class="text-[11px] bg-purple-100 text-purple-700 px-2.5 py-0.5 rounded-full font-semibold">Cam kết chất lượng</span>
+                            </div>
+
+                            <!-- 3 Horizontal Grid Blocks -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <!-- Card 1: Tiến độ -->
+                                <div class="bg-white/90 p-3.5 rounded-xl border border-emerald-200/60 shadow-2xs flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-emerald-300 cursor-default">
+                                    <div class="flex items-start gap-2 text-emerald-700 font-bold mb-1.5">
+                                        <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs shrink-0 mt-0.5">
+                                            <i class="fa-solid fa-clock"></i>
+                                        </div>
+                                        <span class="text-xl font-heading font-extrabold leading-tight">Đảm bảo 100% Tiến độ</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed">
+                                        Bàn giao bài viết và các đầu việc SEO/check bài luôn đúng hoặc trước thời hạn cam kết.
+                                    </p>
+                                </div>
+
+                                <!-- Card 2: Chất lượng -->
+                                <div class="bg-white/90 p-3.5 rounded-xl border border-purple-200/60 shadow-2xs flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-purple-300 cursor-default">
+                                    <div class="flex items-start gap-2 text-purple-700 font-bold mb-1.5">
+                                        <div class="w-7 h-7 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-xs shrink-0 mt-0.5">
+                                            <i class="fa-solid fa-feather-pointed"></i>
+                                        </div>
+                                        <span class="text-xl font-heading font-extrabold leading-tight">Content chuẩn SEO</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed">
+                                        Chuẩn Search Intent, chuẩn SEO, đủ ý theo outline chiến lược; soát kỹ lỗi trước khi giao.
+                                    </p>
+                                </div>
+
+                                <!-- Card 3: First Draft -->
+                                <div class="bg-white/90 p-3.5 rounded-xl border border-blue-200/60 shadow-2xs flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-blue-300 cursor-default">
+                                    <div class="flex items-start gap-2 text-blue-700 font-bold mb-1.5">
+                                        <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center text-xs shrink-0 mt-0.5">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                        </div>
+                                        <span class="text-xl font-heading font-extrabold leading-tight">Duyệt First-Draft Cao</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed">
+                                        Tỉ lệ đạt chất lượng tốt ngay từ bản thảo đầu tiên, hạn chế tối đa số lần feedback, tiết kiệm thời gian.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Industries Covered (Full Horizontal Row) -->
+                        <div class="pt-1">
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Các lĩnh vực đã triển khai:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Bất động sản</span>
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Kiến trúc & Nội thất</span>
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Du lịch</span>
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Thiết bị công nghiệp</span>
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Dịch vụ vận chuyển</span>
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Dịch vụ bảo vệ</span>
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Dịch vụ vệ sinh</span>
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Dụng cụ thể thao</span>
+                                <span class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-100 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default">Y tế</span>
+                            </div>
+                        </div>
+
+                        <!-- PROMINENT FREELANCE SAMPLE DRIVE LINK BUTTON -->
+                        <div class="pt-2">
+                            <a href="https://drive.google.com/drive/folders/1IM7qSjagPD9sJOzmKN_aVInYOZK3YQHo?usp=drive_link" 
+                               target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-purple-500/20 hover:shadow-lg transition transform hover:-translate-y-0.5 group">
+                                <i class="fa-solid fa-folder-closed text-lg text-purple-200 group-hover:scale-110 transition"></i>
+                                <span>Xem Một Số Bài Viết Đã Triển Khai</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-80 group-hover:translate-x-0.5 transition"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPERIENCE 3: GOBRANDING -->
+                <div class="relative group">
+                    <!-- Timeline Dot -->
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-amber-500 border-4 border-white shadow-md ring-4 ring-amber-100 group-hover:scale-125 transition"></div>
+
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4 transition hover:shadow-glass-hover border-l-4 border-l-amber-500">
+                        <!-- Header Info -->
+                        <div class="flex flex-wrap items-start justify-between gap-3 pb-3 border-b border-slate-200/60">
+                            <div>
+                                <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider">
+                                    06/2022 - 09/2022
+                                </span>
+                                <h3 class="text-xl font-heading font-bold text-slate-900 mt-2">THỰC TẬP SINH SEO</h3>
+                                <p class="text-amber-600 font-semibold text-sm flex items-center gap-2 mt-1">
+                                    <i class="fa-solid fa-graduation-cap"></i> Công ty CP Global Online Branding (Gobranding)
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Content Details -->
+                        <ul class="space-y-2.5 text-slate-700 text-sm sm:text-base">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-amber-500 mt-1 shrink-0"></i>
+                                <span>Nghiên cứu từ khóa, phân tích đối thủ và thực hiện tối ưu hóa SEO Onpage cho các dự án khách hàng.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-amber-500 mt-1 shrink-0"></i>
+                                <span>Triển khai nội dung chuẩn SEO cho hệ thống website vệ tinh/Blog 2.0.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-amber-500 mt-1 shrink-0"></i>
+                                <span>Xây dựng backlink đa kênh (Social, Forum) và quản trị liên kết nội bộ.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SKILLS & TOOLS SECTION -->
+        <section id="skills" class="scroll-mt-24 reveal reveal-zoom">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-10 h-10 rounded-xl bg-cyan-600 text-white flex items-center justify-center font-bold shadow-md shadow-cyan-500/20">
+                    <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-heading font-bold text-slate-900">Kỹ Năng & Công Cụ</h2>
+                    <p class="text-xs text-slate-500">Năng lực chuyên môn và công nghệ ứng dụng</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Skill Card 1: Content & SEO Core -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-blue-300 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg font-bold group-hover:rotate-6 transition">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-slate-900 text-lg">SEO & Keywords</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 block mb-1">Chuyên môn chính:</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">Content SEO</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">SEO Onpage</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">SEO Offpage</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 block mb-1">Công cụ đo lường & Phân tích:</span>
+                            <div class="grid grid-cols-2 gap-2 pt-1">
+                                <div class="p-2.5 rounded-xl bg-white/90 border border-blue-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-blue-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                    <i class="fa-solid fa-chart-pie text-orange-500"></i> Google Analytics
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white/90 border border-blue-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-blue-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                    <i class="fa-solid fa-code text-blue-500"></i> Google Search Console
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white/90 border border-blue-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-blue-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                    <i class="fa-solid fa-fire text-amber-500"></i> Semrush
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white/90 border border-blue-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-blue-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                    <i class="fa-solid fa-frog text-emerald-500"></i> Screaming Frog
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white/90 border border-blue-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-blue-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                    <i class="fa-solid fa-key text-slate-500"></i> Keyword Tool
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white/90 border border-blue-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-blue-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                                    <i class="fa-solid fa-toolbox text-cyan-600"></i> Sonatools
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2: AI Assistance WITH GEMINI LOGO -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-violet-300 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-600 flex items-center justify-center text-lg font-bold group-hover:rotate-6 transition">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-slate-900 text-lg">Ứng Dụng AI</h3>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Sử dụng linh hoạt các công cụ AI như một trợ lý để tăng tốc nghiên cứu, lập ý tưởng, lên outline và tối ưu quy trình sản xuất nội dung.
+                    </p>
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <div class="p-2.5 rounded-xl bg-white/90 border border-violet-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-violet-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                            <i class="fa-solid fa-bolt text-emerald-500"></i> ChatGPT
+                        </div>
+                        
+                        <!-- GEMINI WITH CUSTOM SVG SPARK LOGO -->
+                        <div class="p-2.5 rounded-xl bg-white/90 border border-violet-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-violet-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                            <svg class="w-4 h-4 shrink-0 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C12 6.627 6.627 12 0 12c6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12z"/>
+                            </svg>
+                            <span>Gemini AI</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-white/90 border border-violet-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-violet-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                            <i class="fa-solid fa-book-open text-purple-500"></i> Notebook LM
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-white/90 border border-violet-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-violet-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                            <i class="fa-solid fa-brain text-amber-500"></i> Claude
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-white/90 border border-violet-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-violet-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                            <i class="fa-brands fa-microsoft text-sky-600"></i> Copilot
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-white/90 border border-violet-100 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-2xs hover:border-violet-400 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+                            <i class="fa-solid fa-x text-slate-800"></i> Grok
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3: Design & Media + Drive CTA Link -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-pink-300 transition-all group md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-lg font-bold group-hover:rotate-6 transition">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-slate-900 text-lg">Thiết Kế & Đa Phương Tiện</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 block mb-1">Thiết kế hình ảnh, catalog & dựng video:</span>
+                            <div class="flex flex-wrap gap-1.5 mb-2">
+                                <span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 text-xs font-semibold border border-cyan-100"><i class="fa-solid fa-pen-nib me-1"></i>Canva</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100"><i class="fa-solid fa-image me-1"></i>Photoshop</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 text-xs font-semibold border border-amber-100"><i class="fa-solid fa-vector-square me-1"></i>Illustrator</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-100"><i class="fa-solid fa-video me-1"></i>Capcut</span>
+                            </div>
+                        </div>
+
+                        <!-- PROMINENT DESIGN & MEDIA DRIVE LINK BUTTON -->
+                        <div class="pt-1 pb-1 space-y-2.5">
+                            <a href="https://drive.google.com/drive/folders/18-Lzd9fNU-l8Ja8f198iRLsO-d0FZVc7?usp=drive_link" 
+                               target="_blank" rel="noopener noreferrer"
+                               class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold text-xs shadow-md shadow-pink-500/20 hover:shadow-lg transition transform hover:-translate-y-0.5">
+                                <i class="fa-solid fa-images"></i>
+                                <span>Xem Kho Hình Ảnh Thiết Kế</span>
+                            </a>
+                            
+                            <a href="https://www.tiktok.com/@vlxdtoancau" 
+                               target="_blank" rel="noopener noreferrer"
+                               class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-slate-800 to-black hover:from-slate-900 hover:to-black text-white font-bold text-xs shadow-md shadow-slate-900/20 hover:shadow-lg transition transform hover:-translate-y-0.5">
+                                <i class="fa-brands fa-tiktok text-sm"></i>
+                                <span>Xem Các Video TikTok</span>
+                            </a>
+
+                            <a href="https://drive.google.com/drive/folders/104HLgc_BYwJ_8RgTFhbCCck8ClnUVvYz?usp=drive_link" 
+                               target="_blank" rel="noopener noreferrer"
+                               class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 hover:shadow-lg transition transform hover:-translate-y-0.5">
+                                <i class="fa-solid fa-book-open-reader"></i>
+                                <span>Xem File Catalog / Hồ Sơ Năng Lực</span>
+                            </a>
+                        </div>
+
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 block mb-1">Tin học văn phòng:</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium"><i class="fa-solid fa-file-word text-blue-600 me-1"></i>Word</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium"><i class="fa-solid fa-file-excel text-emerald-600 me-1"></i>Excel</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium"><i class="fa-solid fa-file-powerpoint text-orange-600 me-1"></i>PowerPoint</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section id="education" class="scroll-mt-24 reveal reveal-left">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shadow-md shadow-emerald-500/20">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-heading font-bold text-slate-900">Học Vấn</h2>
+                    <p class="text-xs text-slate-500">Cử Nhân</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-8 hover:border-emerald-300 transition-all">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl font-bold shrink-0">
+                            <i class="fa-solid fa-university"></i>
+                        </div>
+                        <div>
+                            <div class="inline-block px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-1">
+                                Niên khóa 2018 - 2022
+                            </div>
+                            <h3 class="text-xl font-heading font-bold text-slate-900">Thương Mại Điện Tử</h3>
+                            <p class="text-slate-700 font-bold text-sm sm:text-base mt-0.5">
+                                Đại học Công nghệ Kỹ thuật TP.HCM (HCMUTE)
+                            </p>
+                            <p class="text-slate-500 text-xs mt-0.5 italic">
+                                (Trường Đại học Sư phạm Kỹ thuật TP.HCM)
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- GPA Highlight Badge -->
+                    <div class="sm:text-right bg-gradient-to-tr from-emerald-500 to-teal-600 text-white px-5 py-3 rounded-2xl shadow-md self-stretch sm:self-auto flex sm:flex-col items-center justify-between">
+                        <span class="text-xs font-semibold tracking-wider uppercase opacity-90">Điểm GPA</span>
+                        <span class="text-2xl font-heading font-extrabold">3.3 / 4.0</span>
+                    </div>
+                </div>
+
+                <!-- Volunteer Experience -->
+                <div class="mt-6 pt-5 border-t border-emerald-100/80 flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shrink-0 border border-emerald-100">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">Hoạt động ngoại khóa</h4>
+                        <p class="text-sm text-slate-600 mt-1">
+                            Tình nguyện viên chương trình <strong class="text-emerald-700">Tiếp Sức Mùa Thi</strong> (Năm 2019, 2020)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THANK YOU & COLLABORATION INVITATION BANNER -->
+        <section class="glass-card rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden bg-gradient-to-br from-blue-600/95 via-indigo-600/95 to-purple-600/95 text-white shadow-2xl reveal reveal-zoom">
+            <!-- Background Decorative Overlay -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.2),transparent)] pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-3xl mx-auto space-y-6">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-3xl mx-auto border border-white/30 text-amber-300 shadow-md">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                
+                <h2 class="text-2xl sm:text-4xl font-heading font-extrabold tracking-tight">
+                    Cảm Ơn Quý Nhà Tuyển Dụng & Đối Tác!
+                </h2>
+                
+                <p class="text-blue-100 text-sm sm:text-base leading-relaxed font-medium">
+                    Chân thành cảm ơn Quý Doanh nghiệp/Anh/Chị đã dành thời gian quan tâm đến CV của tôi. Với kinh nghiệm qua nhiều năm với nhiều lĩnh vực, khả năng ứng dụng AI hiệu quả cùng tinh thần trách nhiệm cao trong công việc, tôi rất mong có cơ hội được đồng hành cùng Quý vị để tạo nên những giá trị bền vững.
+                </p>
+
+                <div class="pt-2 flex flex-wrap items-center justify-center gap-4">
+                    <a href="https://drive.google.com/file/d/1s1JZzR8Y9IvJh8ZL-mLC8vQmEeH4ScIY/view?usp=drive_link" target="_blank" rel="noopener noreferrer"
+                       class="px-8 py-3.5 rounded-2xl bg-white text-blue-700 font-bold hover:bg-blue-50 shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-folder-open text-base text-blue-600"></i>
+                        <span>Xem Full Portfolio</span>
+                    </a>
+
+                    <a href="https://zalo.me/0879302119" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Liên Hệ: 0879 302 119</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 border-t border-slate-200/80 bg-white/60 backdrop-blur-md py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500 text-xs space-y-2">
+            <p class="font-semibold text-slate-700">NGUYỄN THỊ NGỌC TRANG — Content SEO Specialist</p>
+            <p>Hotline: <a href="tel:0879302119" class="text-blue-600 hover:underline">0879 302 119</a> • Email: <a href="mailto:ngoctrang.contact@gmail.com" class="text-blue-600 hover:underline">ngoctrang.contact@gmail.com</a> • LinkedIn: <a href="https://linkedin.com/in/trangntn/" target="_blank" class="text-blue-600 hover:underline">linkedin.com/in/trangntn/</a></p>
+            <p class="text-slate-400">© 2026 Trang Leo</p>
+        </div>
+    </footer>
+
+    <!-- PORTFOLIO QR MODAL -->
+    <div id="portfolio-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card bg-white/95 rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-6 relative shadow-2xl transform scale-95 transition-transform duration-300" id="modal-card">
+            <!-- Close Button -->
+            <button onclick="closePortfolioModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl mx-auto">
+                    <i class="fa-solid fa-qrcode"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-slate-900">Mã QR Portfolio</h3>
+                <p class="text-xs text-slate-500">Quét mã bằng camera điện thoại hoặc ứng dụng Zalo để truy cập Portfolio trên Google Drive</p>
+            </div>
+
+            <!-- Dynamically Generated QR Code for correct Drive Link -->
+            <div class="bg-gradient-to-tr from-blue-50 to-indigo-50 p-6 rounded-2xl border border-slate-200 flex flex-col items-center justify-center space-y-3">
+                <div class="w-48 h-48 bg-white p-3 rounded-2xl shadow-md border border-slate-200 flex items-center justify-center relative">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1s1JZzR8Y9IvJh8ZL-mLC8vQmEeH4ScIY%2Fview%3Fusp%3Ddrive_link" 
+                         alt="Portfolio Drive QR Code" 
+                         class="w-full h-full object-contain"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'text-center p-4 text-slate-400 text-xs font-semibold\'><i class=\'fa-solid fa-qrcode text-4xl text-blue-600 mb-2 block\'></i>Quét QR Portfolio Drive</div>';">
+                </div>
+                <span class="text-xs font-semibold text-blue-600">Scan to Open Portfolio Google Drive</span>
+            </div>
+
+            <!-- Direct Actions -->
+            <div class="space-y-2">
+                <a href="https://drive.google.com/file/d/1s1JZzR8Y9IvJh8ZL-mLC8vQmEeH4ScIY/view?usp=drive_link" target="_blank" rel="noopener noreferrer" 
+                   class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm text-center flex items-center justify-center gap-2 shadow-md transition">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>Mở Portfolio Trực Tiếp Cùng Google Drive</span>
+                </a>
+                <button onclick="closePortfolioModal()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">
+                    Đóng cửa sổ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        // Robust copy to clipboard handler supporting fallback and visual feedback
+        function handleCopy(event, text, label, btnElement) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+
+            let copied = false;
+
+            // Method 1: Modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    triggerSuccessCopy(label, btnElement);
+                }).catch(err => {
+                    fallbackCopy(text, label, btnElement);
+                });
+            } else {
+                fallbackCopy(text, label, btnElement);
+            }
+        }
+
+        // Fallback using execCommand for iframe / restricted permissions
+        function fallbackCopy(text, label, btnElement) {
+            try {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                if (successful) {
+                    triggerSuccessCopy(label, btnElement);
+                } else {
+                    showToast(`Không thể sao chép tự động. Hãy sao chép thủ công: ${text}`);
+                }
+            } catch (err) {
+                showToast(`Hãy chép thủ công: ${text}`);
+            }
+        }
+
+        // UI feedback for copy
+        function triggerSuccessCopy(label, btnElement) {
+            showToast(`Đã sao chép ${label}: ${textToCopy(label)}`);
+
+            if (btnElement) {
+                const originalHTML = btnElement.innerHTML;
+                btnElement.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i>';
+                btnElement.classList.add('bg-emerald-100');
+                
+                setTimeout(() => {
+                    btnElement.innerHTML = originalHTML;
+                    btnElement.classList.remove('bg-emerald-100');
+                }, 2000);
+            }
+        }
+
+        function textToCopy(label) {
+            if (label.includes('điện thoại') || label.includes('Số')) return '0879 302 119';
+            if (label.includes('Email')) return 'ngoctrang.contact@gmail.com';
+            return '';
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Portfolio Modal Functions
+        function openPortfolioModal() {
+            const modal = document.getElementById('portfolio-modal');
+            const card = document.getElementById('modal-card');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+        }
+
+        function closePortfolioModal() {
+            const modal = document.getElementById('portfolio-modal');
+            const card = document.getElementById('modal-card');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+        }
+
+        // Close modal on background click
+        document.getElementById('portfolio-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePortfolioModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePortfolioModal();
+            }
+        });
+
+        // Scroll Reveal: fade + slide in each section as it enters the viewport
+        (function initScrollReveal() {
+            const revealEls = document.querySelectorAll('.reveal');
+
+            if (!('IntersectionObserver' in window) || revealEls.length === 0) {
+                // Fallback: just show everything if IntersectionObserver isn't supported
+                revealEls.forEach(el => el.classList.add('reveal-active'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                        observer.unobserve(entry.target); // only animate once
+                    }
+                });
+            }, {
+                threshold: 0.01,
+                // Small positive bottom margin: triggers just slightly before the
+                // section is fully visible, so there's no "empty" wait, but not so
+                // early that the (now longer) animation finishes off-screen.
+                rootMargin: '0px 0px 40px 0px'
+            });
+
+            revealEls.forEach(el => observer.observe(el));
+        })();
+
+        // Intro Splash Screen: show "Xin chào!" behind a glass blur, then pull it
+        // away to reveal the site content underneath.
+        (function initIntroSplash() {
+            const splash = document.getElementById('intro-splash');
+            if (!splash) return;
+
+            const HOLD_MS = 1300;   // how long the greeting stays fully visible
+            const FADE_MS = 700;    // must match the CSS transition duration above
+
+            function dismissSplash() {
+                splash.classList.add('intro-hide');
+                document.body.classList.remove('intro-active');
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                }, FADE_MS);
+            }
+
+            // Wait for the page to finish loading, then hold briefly on the
+            // greeting before revealing the content.
+            window.addEventListener('load', () => {
+                setTimeout(dismissSplash, HOLD_MS);
+            });
+
+            // Safety net: if something delays the load event, don't trap the
+            // visitor behind the splash screen forever.
+            setTimeout(dismissSplash, HOLD_MS + 2500);
+        })();
+    </script>
+</body>
+</html>
